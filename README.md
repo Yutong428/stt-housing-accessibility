@@ -283,7 +283,3 @@ results/tables/check3_drop_nearest_results.tex
 results/tables/check4_full_sample_results.tex
 results/tables/check5_approval_shock_results.tex
 ```
-
-## License
-
-Add a license before public release if this repository will be distributed publicly.
