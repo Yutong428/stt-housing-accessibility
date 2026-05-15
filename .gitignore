@@ -1,0 +1,19 @@
+# Local environments
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+.idea/
+
+# Data and API caches
+data/raw/
+data/processed/
+cache/
+
+# Generated outputs
+results/
+
+# Local secrets
+.env
+*.key
+
