@@ -9,8 +9,12 @@ The code is organized so that each step can be rerun independently, with impleme
 The main empirical design is a transaction-level continuous-treatment DiD-style hedonic regression:
 
 ```text
-log_price_psf_it = estate FE_i + month FE_t + beta * (Access_i x Post_t) + controls_it + error_it
+log_price_psf_ijt = estate FE_i + month FE_t
+                  + beta * (Access_i x Post_ijt)
+                  + controls_ijt + error_ijt
 ```
+
+Here, `i` indexes the estate, `j` indexes the transaction within an estate-month, and `t` indexes the calendar month. `Post_ijt` is defined from each transaction date, with the main shock dated `2024-03-08`.
 
 Main event date:
 
@@ -28,10 +32,10 @@ Accessibility measures:
 
 ```text
 access_google = -log(nearest Google driving time to STT + 1)
-access_eucl   = -log(nearest Euclidean distance to STT + 1)
+access_eucl   = -log(nearest non-network distance to STT + 1)
 ```
 
-The main regressions use estate fixed effects, month fixed effects, and standard errors clustered by estate.
+The non-network benchmark is computed from coordinates using great-circle distance and is referred to as the Euclidean benchmark in the analysis. The main regressions use estate fixed effects, month fixed effects, and standard errors clustered by estate.
 
 ## Repository Structure
 
@@ -238,6 +242,8 @@ results/tables/check4_full_sample_results.tex
 results/tables/check5_approval_shock_results.tex
 ```
 
+The diagnostic script is separate from the main ±1 year regressions. In the current implementation, Checks 1-3 and Check 5 are estimated on the full available processed analysis sample, while Check 4 explicitly reports the full-sample version of the main specifications for comparison with the main event-window results.
+
 ### 9. Generate Maps
 
 ```bash
@@ -266,7 +272,8 @@ The heatmap color is based on estate-level post-minus-pre hedonic residual growt
 
 - Raw Centanet data and Google API caches are excluded from Git by default.
 - Generated results are excluded from Git by default.
-- The code can be rerun from scratch if the user has access to Centanet pages and Google API credentials.
+- Reproducing the raw scrape depends on Centanet continuing to expose its rolling 3-year public transaction window.
+- Downstream code can be rerun from stored inputs if the user has Google API credentials for any uncached API calls.
 - Google API outputs may change slightly over time if Google updates geocoding or routing behavior.
 - The scripts keep raw crawler output separate from processed analysis data.
 
