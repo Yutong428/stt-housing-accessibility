@@ -279,12 +279,6 @@ The heatmap color is based on estate-level post-minus-pre hedonic residual growt
 
 ## Main Outputs for Writing
 
-The current report draft is:
-
-```text
-results/report/STT房价研究_中文详细报告母稿.md
-```
-
 The key LaTeX tables are:
 
 ```text
@@ -296,7 +290,3 @@ results/tables/check3_drop_nearest_results.tex
 results/tables/check4_full_sample_results.tex
 results/tables/check5_approval_shock_results.tex
 ```
-
-## License
-
-Add a license before public release if this repository will be distributed publicly.
